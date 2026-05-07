@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { DASHBOARD_PAGES } from './config/pages-url.config'
 import { EnumTokens } from './services/auth-token.service'
 
-export async function middleware(request: NextRequest, response: NextResponse) {
+export async function proxy(request: NextRequest, response: NextResponse) {
 	const { url, cookies } = request
 
 	const refreshToken = cookies.get(EnumTokens.REFRESH_TOKEN)?.value
@@ -26,5 +26,5 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-	matcher: ['/i/:path*', '/auth/:path']
+	matcher: ['/i/:path*', '/auth', '/auth/:path*']
 }
